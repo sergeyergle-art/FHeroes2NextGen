@@ -463,13 +463,14 @@ uint32_t Battle::Unit::GetSpeed( const bool skipStandingCheck, const bool skipMo
     uint32_t speed = Monster::GetBaseSpeed();
 
     if ( Modes( SP_SLOW ) ) {
-        speed = Speed::getSlowSpeedFromSpell( speed );
+        uint32_t bonus = Monster::GetBonusSpeed();
+        speed = Speed::getSlowSpeedFromSpell( speed - bonus ) + bonus;
     }
     if ( Modes( SP_HASTE ) ) {
         speed = Speed::getHasteSpeedFromSpell( speed );
     }
 
-    return speed + Monster::GetBonusSpeed();
+    return speed;
 }
 
 uint32_t Battle::Unit::GetPriority( const bool skipStandingCheck, const bool skipMovedCheck ) const
