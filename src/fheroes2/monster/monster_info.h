@@ -114,7 +114,6 @@ namespace fheroes2
 
         uint32_t priority;
         uint32_t speed;
-        uint32_t bonusSpeed;
 
         uint32_t experience;
         int32_t monsterBaseStrength;

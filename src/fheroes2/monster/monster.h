@@ -213,13 +213,25 @@ public:
 
     uint32_t GetBonusSpeed() const
     {
-        return fheroes2::getMonBattleStats( id ).bonusSpeed;
+        uint32_t bonus = 0;
+
+        auto& stats = fheroes2::getMonBattleStats( id );
+
+        if ( stats.hasAbil( fheroes2::MonAbil::DOUBLE_HEX_SIZE ) )
+            bonus += 2;
+
+        if ( stats.hasAbil( fheroes2::MonAbil::IRON_MUSCLES ) )
+            bonus += 2;
+
+        if ( stats.hasAbil( fheroes2::MonAbil::ETHERIC_BODY ) )
+            bonus += 3;
+
+        return bonus;
     }
 
     uint32_t GetSpeed() const
     {
-        auto& d = fheroes2::getMonBattleStats( id );
-        return d.speed + d.bonusSpeed;
+        return fheroes2::getMonBattleStats( id ).speed;
     }
 
     uint32_t GetPriority() const
