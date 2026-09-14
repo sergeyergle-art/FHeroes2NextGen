@@ -2475,7 +2475,12 @@ void Battle::Interface::_redrawBattleGround()
     // Objects near the left and right borders of the Battlefield.
     if ( _borderObjectsIcn != ICN::UNKNOWN ) {
         const fheroes2::Sprite & frng = Assets::getImage( _borderObjectsIcn, 0 );
-        fheroes2::Blit( frng, _battleGround, frng.x(), frng.y() );
+
+        auto dx = frng.width() / 2;
+        fheroes2::Blit( frng, 0, 0, _battleGround, frng.x(), frng.y(), dx, frng.height() );
+
+        auto dw = frng.width() - dx;
+        fheroes2::Blit( frng, dx, 0, _battleGround, _battleGround.width() - dw, frng.y(), dw, frng.height() );
     }
 
     // Big obstacles in the center of the Battlefield.
